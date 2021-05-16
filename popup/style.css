@@ -1,0 +1,47 @@
+/* 
+Pink: #ff00bf
+Purple: #962efc
+Gray 1: #f9f9fa
+Gray 2: #eeeef0
+Gray 3: #b1b1b1
+Gray 4: #7e7e7e
+
+'rgba(255, 99, 132, 0.2)'
+'rgba(255, 99, 132, 1)'
+ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-size: 18px;
+  font-family: 'Titillium', sans-serif;
+  font-weight: 300;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #444;
+  width: 100%;
+}
+
+.menu li {
+  list-style-type: none;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+#logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+canvas {
+  min-width: 400px;
+  min-height: 400px;
+}

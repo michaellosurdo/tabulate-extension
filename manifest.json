@@ -1,0 +1,15 @@
+{
+  "name": "Tabulate",
+  "description": "Get a snapshot of your open tabs!",
+  "version": "0.1",
+  "manifest_version": 3,
+  "permissions": ["storage", "tabs", "windows", "bookmarks"],
+  "action": {
+    "default_title": "Tabulate",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "24": "/assets/tab_icon_white.png"
+    }
+  },
+  "options_page": "options/options.html"
+}
