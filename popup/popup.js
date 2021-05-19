@@ -19,10 +19,10 @@ const buildChartData = (tabs) => {
   return data;
 };
 
-const getCounts = (tabData) => {
+const getCounts = (data) => {
   const counts = [];
-  for (const hostname in tabData) {
-    counts.push(tabData[hostname].count);
+  for (const hostname in data) {
+    counts.push(data[hostname].count);
   }
   return counts;
 };
