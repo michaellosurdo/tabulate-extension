@@ -4,9 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Tabulate | Options</title>
 </head>
 <body>
+    <div class="header">
+        <h1>Tabulate <span>| Configure</span></h1>
+    </div>
+    <div class="content">
+        <div class="section">
+            <div class="line-sep">
+                <div class="card">
+                    <div class="card-title">
+                        <h2>To choose what to track, add domains manually...</h2>
+                        <p>Enter specific domains for tracking.</p>
+                    </div>
+                    <div class="card-content">
+                        <form action="" autocomplete="off">
+                            <input type="text" placeholder="example.com" id="textInput">
+                            <input type="submit" value="Add" class="btn">
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">
+                        <h2>...or choose from your currently open tabs!</h2>
+                        <p>Click to add any of the below domains.</p>
+                    </div>
+                    <div class="card-content">
+                        <ul id="unsaved"></ul>
+                    </div>
+                </div>
     
+            </div>
+            </div>
+        <div class="section">
+            <div class="card">
+                <div class="card-title">
+                    <h2>Saved Domains</h2>
+                    <p>The list of domains you've saved for tracking in the Tabulate extension chart.</p>
+                </div>
+                <div class="card-content">
+                    <ul id="saved" ></ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script src="options.js"></script>
 </body>
 </html>

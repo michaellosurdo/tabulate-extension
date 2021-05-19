@@ -11,5 +11,8 @@
       "24": "/assets/tab_icon_white.png"
     }
   },
-  "options_page": "options/options.html"
+  "options_page": "options/options.html",
+  "background": {
+    "service_worker": "background.js"
+  }
 }
