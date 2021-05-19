@@ -87,6 +87,10 @@ form.addEventListener('submit', (e) => {
   // Reset form input value
   input.value = '';
 
+  // Save value in storage
+  savedDomains.push(domain);
+  chrome.storage.sync.set({ savedDomains });
+
   const list = document.getElementById('saved');
   const item = document.createElement('li');
   const img = document.createElement('img');
