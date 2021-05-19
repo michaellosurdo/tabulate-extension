@@ -1,52 +1,52 @@
 // Helper functions
+const getUniqueDomains = (tabs) => {
+  let domains = tabs.map((tab) =>
+    new URL(tab.url).hostname.replace(/^www./, '')
+  );
+  return [...new Set(domains)];
+};
+
 const buildChartData = (tabs) => {
-  const data = {};
+  const domains = getUniqueDomains(tabs);
 
-  for (const tab of tabs) {
-    const hostname = new URL(tab.url).hostname;
-    console.log(hostname);
-
-    if (hostname in data) {
-      data[hostname].count += 1;
-      data[hostname].tabs.push(tab);
-    } else {
-      data[hostname] = {};
-      data[hostname].count = 1;
-      data[hostname].tabs = [tab];
-    }
+  // Create list of objects, one for each domain
+  // { domain: str, tabs: [ tabObject, ... ] }
+  const data = [];
+  for (domain of domains) {
+    data.push({
+      domain,
+      tabs: tabs.filter(
+        (tab) => domain === new URL(tab.url).hostname.replace(/^www./, '')
+      ),
+    });
   }
 
+  // Sort descending
+  data.sort((a, b) => (a.tabs.length < b.tabs.length ? 1 : -1));
   return data;
 };
 
-const getCounts = (data) => {
-  const counts = [];
-  for (const hostname in data) {
-    counts.push(data[hostname].count);
-  }
-  return counts;
-};
-
-const buildChart = (data) => {
+buildChart = (data) => {
   const ctx = document.getElementById('chart').getContext('2d');
-
-  const myChart = new Chart(ctx, {
+  const config = {
     type: 'bar',
     data: {
-      labels: Object.keys(data),
       datasets: [
         {
+          data,
           label: 'Open Tabs',
-          data: getCounts(data),
-          // backgroundColor: 'rgba(255, 0, 191, 0.2)',
           backgroundColor: 'hsla(206, 92%, 46%, 0.4)',
-          // borderColor: 'rgba(255, 0, 191, 1)',
           borderColor: '#0984e3',
           borderWidth: 1,
+          maxBarThickness: 100,
         },
       ],
     },
     options: {
+      parsing: {
+        xAxisKey: 'domain',
+        yAxisKey: 'tabs.length',
+      },
       scales: {
         x: {
           grid: {
@@ -61,10 +61,12 @@ const buildChart = (data) => {
         },
       },
     },
-  });
+  };
+
+  const chart = new Chart(ctx, config);
 };
 
-// Build Tabulate chart
+// Build chart
 // Get configured domain list from storage
 chrome.storage.sync.get('savedDomains', ({ savedDomains }) => {
   // Get all open tabs across windows
@@ -73,7 +75,7 @@ chrome.storage.sync.get('savedDomains', ({ savedDomains }) => {
     if (savedDomains.length > 0) {
       tabs = tabs.filter((tab) => {
         const domain = new URL(tab.url).hostname.replace(/^www./, '');
-        if (savedDomains.includes(domain)) return domain;
+        if (savedDomains.includes(domain)) return tab;
       });
     }
 
@@ -82,11 +84,7 @@ chrome.storage.sync.get('savedDomains', ({ savedDomains }) => {
   });
 });
 
-// Add Options page event listener
+// Open Options page on icon click
 document.getElementById('options').addEventListener('click', () => {
   chrome.runtime.openOptionsPage();
-  // chrome.tabs.create({
-  //   url: 'chrome://extensions/?options=' + chrome.runtime.id,
-  // });
-  console.log('hi');
 });
