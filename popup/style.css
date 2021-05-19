@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'material-icons';
+  src: url('"chrome-extension://__MSG_@@extension_id__/webfonts/material-icons.woff2')
+    format('woff2');
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -28,6 +34,7 @@ html {
   align-items: center;
   background-color: var(--primary);
   width: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .menu li {
@@ -41,8 +48,13 @@ html {
   font-weight: 700;
 }
 
-#options {
+#options img {
   cursor: pointer;
+  transition: 300ms;
+}
+
+#options img:hover {
+  transform: rotate(25deg);
 }
 
 canvas {
